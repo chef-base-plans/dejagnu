@@ -7,9 +7,10 @@ control 'core-plans-dejagnu-works' do
   impact 1.0
   title 'Ensure dejagnu works as expected'
   desc '
-  Note: although the stderr contains a WARNING, the stdout contains the required 
-  version information so this test achieves its aim of detecting the dejagnu version
+  Verify dejagnu by ensuring (1) its installation directory exists and (2) that
+  it returns the expected version
   '
+  
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }

@@ -7,7 +7,8 @@ control 'core-plans-dejagnu-exists' do
   impact 1.0
   title 'Ensure dejagnu exists'
   desc '
-  '
+  Verify dejagnu by ensuring /bin/runtest exists'
+  
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
