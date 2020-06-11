@@ -16,6 +16,7 @@ control 'core-plans-dejagnu-works' do
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
+    its('stderr') { should be_empty }
   end
   
   command_relative_path = input('command_relative_path', value: 'bin/runtest')
