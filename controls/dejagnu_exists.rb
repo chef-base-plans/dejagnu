@@ -2,12 +2,12 @@ title 'Tests to confirm dejagnu exists'
 
 plan_origin = ENV['HAB_ORIGIN']
 plan_name = input('plan_name', value: 'dejagnu')
- 
+
 control 'core-plans-dejagnu-exists' do
   impact 1.0
   title 'Ensure dejagnu exists'
   desc '
-  Verify dejagnu by ensuring /bin/runtest exists'
+  Verify dejagnu by ensuring bin/runtest exists'
   
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
@@ -15,8 +15,8 @@ control 'core-plans-dejagnu-exists' do
     its('stdout') { should_not be_empty }
   end
 
-  command_relative_path = input('command_relative_path', value: '/bin/runtest')
-  command_full_path = plan_installation_directory.stdout.strip + "#{command_relative_path}"
+  command_relative_path = input('command_relative_path', value: 'bin/runtest')
+  command_full_path = File.join(plan_installation_directory.stdout.strip, "#{command_relative_path}")
   describe file(command_full_path) do
     it { should exist }
   end
